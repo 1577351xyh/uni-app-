@@ -52,7 +52,28 @@
 	export default {
 		data() {
 			return {
-				
+				list:{
+					userName:'',
+					userImages:'',
+					//关注状态
+					focus:false,
+					centent:'',
+					cententType:'img', //img或者是video
+					titlepic:'',//图片
+					playnum:"",//播放次数
+					long:'2:47',
+					infonum:{
+						index:0,
+						//顶
+						dingnum:11,
+						//踩
+						cainum:11
+					},
+					//分享次数
+					shareNum:'',
+					//评论次数
+					comment:''
+				}
 			}
 		},
 		
