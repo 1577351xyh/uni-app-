@@ -62,6 +62,10 @@
 				"navigationBarTitleText":"动态"
 			}
         }
+        ,{
+            "path" : "compument/index-list/index-list",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
