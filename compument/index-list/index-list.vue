@@ -2,10 +2,10 @@
 		<view class="item">
 			<view class="item_header">
 				<view class="item_header_left">
-					<image src="../../static/images/demo6.jpg" mode=""></image>
-					<text>我是名称</text>
+					<image :src="list.userImages" mode=""></image>
+					<text>{{list.userName}}</text>
 				</view>
-				<view class="item_header_right">
+				<view class="item_header_right" v-if="list.focus==='false'">
 					<view class="icons">
 						<view class="iconfont icon-jia"></view>
 						<text>关注</text>
@@ -14,33 +14,33 @@
 				</view>
 			</view>
 			<view class="item_body">
-				<text class="center">我是很长的文字文字</text>
+				<text class="center">{{list.centent}}</text>
 				<view class="images_vidoe">
-					<image src="../../static/images/banner1.jpg" mode=""></image>
-					<view class="iconfont icon-bofang"></view>
-					<view class="palyNum">
-							<text>20w 次播放 2:47</text>
+					<image :src="list.titlepic" mode=""></image>
+					<view class="iconfont icon-bofang" v-if="list.cententType==='video'"></view>
+					<view class="palyNum" v-if="list.cententType==='video'">
+						<text>{{list.playnum}} 次播放 {{list.long}}</text>
 					</view>
 				</view>
 				<view class="models">
 					<view class="models_left">
 						<view class="flex_floor">
 							<view class="iconfont icon-xiaolian padding"></view>
-							<text class="padding">987</text>
+							<text class="padding">{{list.infonum.dingnum}}</text>
 						</view>
 						<view class="flex_floor">
 							<view class="iconfont icon-shibaibiaoqing padding"></view>
-							<text class="padding">17</text>
+							<text class="padding">{{list.infonum.cainum}}</text>
 						</view>
 					</view>
 					<view class="models_right">
 						<view class="flex_floor">
 							<view class="iconfont icon-tubiaozhizuo- padding"></view>
-							<text class="padding">987</text>
+							<text class="padding">{{list.comment}}</text>
 						</view>
 						<view class="flex_floor">
 							<view class="iconfont icon-arrow- padding"></view>
-							<text class="padding">17</text>
+							<text class="padding">{{list.shareNum}}</text>
 						</view>
 					</view>
 				</view>
@@ -52,31 +52,17 @@
 	export default {
 		data() {
 			return {
-				list:{
-					userName:'',
-					userImages:'',
-					//关注状态
-					focus:false,
-					centent:'',
-					cententType:'img', //img或者是video
-					titlepic:'',//图片
-					playnum:"",//播放次数
-					long:'2:47',
-					infonum:{
-						index:0,
-						//顶
-						dingnum:11,
-						//踩
-						cainum:11
-					},
-					//分享次数
-					shareNum:'',
-					//评论次数
-					comment:''
-				}
+				
 			}
 		},
-		
+		created() {
+			console.log(this.list)
+		},
+		props:{
+			list:{
+				type:Object
+			}
+		}
 	}
 </script>
 
@@ -181,5 +167,8 @@
 .padding{
 	padding:0 10upx;
 	color:rgb(213, 213, 213);
+}
+img{
+	width: 100%;
 }
 </style>
