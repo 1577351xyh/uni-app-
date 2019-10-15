@@ -1,5 +1,20 @@
 <template>
 	<view>
+		<!-- tab -->
+		<view>
+			<scroll-view scroll-x show-scrollbar="false" class="uni-swiper-tab">
+				<block v-for="(tab,index) in tabBars" :key="index">
+					<view class="swiper-tab-list" :class="{'active':tabIndex==index}" @click="tabclick(index)">
+						{{tab.name}}
+						<view class="swiper-tab-line">
+							
+						</view>
+					</view>
+				</block>
+				
+			</scroll-view>
+		</view>
+		<!-- item内容 -->
 		<block v-for="(item,index) in listarr" :key="index">
 			<list :list="item"></list>
 		</block>
@@ -55,6 +70,20 @@
 					//评论次数
 					comment:'100'
 				}],
+				tabBars:[
+					{name:'关注',id:0},
+				    {name:'推荐',id:1},
+				    {name:'体育',id:2},
+					{name:'热点',id:3},
+					{name:'财经',id:4},
+					{name:'娱乐',id:5},
+				],
+				tabIndex:0
+			}
+		},
+		methods:{
+			tabclick(index){
+				this.tabIndex = index;
 			}
 		},
 		components:{
@@ -63,6 +92,14 @@
 	}
 </script>
 
-<style>
-
+<style lang="less">
+.active{
+	color:#FFB400;
+	
+}
+.active .swiper-tab-line{
+	border-bottom: 6upx solid #FFB400;
+	width: 60upx;
+	margin: 0 auto;
+}
 </style>
