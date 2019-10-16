@@ -1,18 +1,18 @@
 <template>
 	<view>
 		<!-- tab -->
-		<swiperHeader :tabBars="tabBars" :tabIndex = "tabIndex" @tabclick="tabclick"></swiperHeader>
+		<tabHeader :tabBars="tabBars" :tabIndex="tabIndex" @tabclick="tabclick"></tabHeader>
 		<view class="uni-tab-bar">
 			<swiper class="swiper-box" 
 			:style="{height:SwiperHeight+'px'}" 
 			:current="tabIndex"
 			@change="onChange">
 				<swiper-item v-for="(item,index) in newslist" :key="index">
-					<scroll-view scroll-y class="list">
+					<scroll-view scroll-y class="list" @scrolltolower="loading(index)">
 						<block v-for="(items,index) in item.list" :key="index">
 							<list :list="items"></list>
 						</block>
-						<view></view>
+						<loading :loading="item.loading"></loading>
 					</scroll-view>
 				</swiper-item>
 			</swiper>
@@ -23,9 +23,9 @@
 </template>
 
 <script>
-	import list from '../../compument/index-list/index-list.vue'
-	import swiperHeader from '../../compument/swiper-tab/swiper-tab.vue'
-	
+	import list from '../../compument/index-list/index-list.vue';
+	import tabHeader from '../../compument/swiper-tab/swiper-tab.vue'
+	import loading from'../../compument/loading-more/loading-more.vue'
 	export default {
 		data() {
 			return {
@@ -39,7 +39,8 @@
 					{name:'娱乐',id:5},
 				],
 				newslist:[
-					{
+					{	
+						loading:'下拉加载更多',
 					    list:[{
 					    	userName:'我是名字',
 					    	userImages:'../../static/images/demo6.jpg',
@@ -86,6 +87,7 @@
 					    	}],
 					},
 					{
+						loading:'下拉加载更多',
 						list:[{
 							userName:'我是名字',
 							userImages:'../../static/images/demo6.jpg',
@@ -119,23 +121,55 @@
 			},
 			onChange(e){
 				this.tabIndex = e.detail.current;
+			},
+			loading(index){
+				if(this.newslist[index].loading!=="下拉加载更多"){return};
+				this.newslist[index].loading = "加载中...";
+				setTimeout(()=>{
+					let obj = {
+							userName:'我是名字',
+							userImages:'../../static/images/demo6.jpg',
+							//关注状态
+							focus:'false',
+							centent:'我是很长的文字文字',
+							cententType:'img', //img或者是video
+							titlepic:'../../static/images/banner1.jpg',//图片
+							playnum:"20w",//播放次数
+							long:'2:47',
+							infonum:{
+								index:0,
+								//顶
+								dingnum:11,
+								//踩
+								cainum:11
+							},
+							//分享次数
+							shareNum:'10',
+							//评论次数
+							comment:'100'
+					}
+					this.newslist[index].list.push(obj);
+					this.newslist[index].loading = "下拉加载更多"
+				},500)
+				
 			}
 		},
 		onLoad() {
 			uni.getSystemInfo({
 				success:(res)=> {
-					console.log(res)
-					this.SwiperHeight = res.windowHeight - uni.upx2px(100);
+					this.SwiperHeight = res.windowHeight;
 				}
 			})
 		},
 		components:{
 			list,
-			swiperHeader
+			tabHeader,
+			loading
 		}
 	}
 </script>
 
 <style lang="less">
+	
 
 </style>
