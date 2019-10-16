@@ -131,6 +131,7 @@
 			},
 			onChange(e){
 				this.tabIndex = e.detail.current;
+				console.log(e)
 			}
 		},
 		onLoad() {
