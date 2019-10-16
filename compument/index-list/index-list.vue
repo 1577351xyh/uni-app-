@@ -56,7 +56,6 @@
 			}
 		},
 		created() {
-			console.log(this.list)
 		},
 		props:{
 			list:{

@@ -15,9 +15,24 @@
 			</scroll-view>
 		</view>
 		<!-- item内容 -->
-		<block v-for="(item,index) in listarr" :key="index">
-			<list :list="item"></list>
-		</block>
+		
+		
+		<view class="uni-tab-bar">
+			<swiper class="swiper-box" 
+			:style="{height:SwiperHeight+'px'}" 
+			:current="tabIndex"
+			@change="onChange">
+				<swiper-item v-for="(item,index) in newslist" :key="index">
+					<scroll-view scroll-y class="list">
+						<block v-for="(items,index) in item.list" :key="index">
+							<list :list="items"></list>
+						</block>
+					</scroll-view>
+				</swiper-item>
+			</swiper>
+		</view>
+		
+		
 	</view>
 </template>
 
@@ -26,50 +41,7 @@
 	export default {
 		data() {
 			return {
-				listarr:[{
-					userName:'我是名字',
-					userImages:'../../static/images/demo6.jpg',
-					//关注状态
-					focus:'false',
-					centent:'我是很长的文字文字',
-					cententType:'img', //img或者是video
-					titlepic:'../../static/images/banner1.jpg',//图片
-					playnum:"20w",//播放次数
-					long:'2:47',
-					infonum:{
-						index:0,
-						//顶
-						dingnum:11,
-						//踩
-						cainum:11
-					},
-					//分享次数
-					shareNum:'10',
-					//评论次数
-					comment:'100'
-				},
-				{
-					userName:'我是名字',
-					userImages:'../../static/images/demo6.jpg',
-					//关注状态
-					focus:'true',
-					centent:'我是很长的文字文字',
-					cententType:'video', //img或者是video
-					titlepic:'../../static/images/banner1.jpg',//图片
-					playnum:"20w",//播放次数
-					long:'2:47',
-					infonum:{
-						index:0,
-						//顶
-						dingnum:11,
-						//踩
-						cainum:11
-					},
-					//分享次数
-					shareNum:'10',
-					//评论次数
-					comment:'100'
-				}],
+				SwiperHeight:500,
 				tabBars:[
 					{name:'关注',id:0},
 				    {name:'推荐',id:1},
@@ -78,13 +50,96 @@
 					{name:'财经',id:4},
 					{name:'娱乐',id:5},
 				],
+				newslist:[
+					{
+					    list:[{
+					    	userName:'我是名字',
+					    	userImages:'../../static/images/demo6.jpg',
+					    	//关注状态
+					    	focus:'false',
+					    	centent:'我是很长的文字文字',
+					    	cententType:'img', //img或者是video
+					    	titlepic:'../../static/images/banner1.jpg',//图片
+					    	playnum:"20w",//播放次数
+					    	long:'2:47',
+					    	infonum:{
+					    		index:0,
+					    		//顶
+					    		dingnum:11,
+					    		//踩
+					    		cainum:11
+					    	},
+					    	//分享次数
+					    	shareNum:'10',
+					    	//评论次数
+					    	comment:'100'
+					    },
+					    {
+					    	userName:'我是名字',
+					    	userImages:'../../static/images/demo6.jpg',
+					    	//关注状态
+					    	focus:'true',
+					    	centent:'我是很长的文字文字',
+					    	cententType:'video', //img或者是video
+					    	titlepic:'../../static/images/banner1.jpg',//图片
+					    	playnum:"20w",//播放次数
+					    	long:'2:47',
+					    	infonum:{
+					    		index:0,
+					    		//顶
+					    		dingnum:11,
+					    		//踩
+					    		cainum:11
+					    	},
+					    	//分享次数
+					    	shareNum:'10',
+					    	//评论次数
+					    	comment:'100'
+					    	}],
+					},
+					{
+						list:[{
+							userName:'我是名字',
+							userImages:'../../static/images/demo6.jpg',
+							//关注状态
+							focus:'false',
+							centent:'我是很长的文字文字',
+							cententType:'img', //img或者是video
+							titlepic:'../../static/images/banner1.jpg',//图片
+							playnum:"20w",//播放次数
+							long:'2:47',
+							infonum:{
+								index:0,
+								//顶
+								dingnum:11,
+								//踩
+								cainum:11
+							},
+							//分享次数
+							shareNum:'10',
+							//评论次数
+							comment:'100'
+						}]
+					}
+				],
 				tabIndex:0
 			}
 		},
 		methods:{
 			tabclick(index){
-				this.tabIndex = index;
+				this.tabIndex  = index;
+			},
+			onChange(e){
+				this.tabIndex = e.detail.current;
 			}
+		},
+		onLoad() {
+			uni.getSystemInfo({
+				success:(res)=> {
+					console.log(res)
+					this.SwiperHeight = res.windowHeight - uni.upx2px(100);
+				}
+			})
 		},
 		components:{
 			list
