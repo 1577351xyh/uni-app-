@@ -1,12 +1,12 @@
 <template>
-		<view class="item">
+		<view class="item animated bounceInUp">
 			<view class="item_header">
 				<view class="item_header_left">
 					<image :src="list.userImages" mode=""></image>
 					<text>{{list.userName}}</text>
 				</view>
-				<view class="item_header_right" v-if="list.focus==='false'">
-					<view class="icons">
+				<view class="item_header_right" v-if="list.focus==='false'" @click="onFocus">
+					<view class="icons" v-if="list.focus==true">
 						<view class="iconfont icon-jia"></view>
 						<text>关注</text>
 					</view>
@@ -24,13 +24,13 @@
 				</view>
 				<view class="models">
 					<view class="models_left">
-						<view class="flex_floor">
+						<view class="flex_floor" :class="{'active':list.infonum.index===1}" @click="likes('zan')">
 							<view class="iconfont icon-xiaolian padding"></view>
-							<text class="padding">{{list.infonum.dingnum}}</text>
+							<text class="padding ding">{{list.infonum.dingnum}}</text>
 						</view>
-						<view class="flex_floor">
+						<view class="flex_floor" :class="{'active':list.infonum.index===2}" @click="likes('cai')">
 							<view class="iconfont icon-shibaibiaoqing padding"></view>
-							<text class="padding">{{list.infonum.cainum}}</text>
+							<text class="padding cai">{{list.infonum.cainum}}</text>
 						</view>
 					</view>
 					<view class="models_right">
@@ -55,17 +55,51 @@
 				
 			}
 		},
-		created() {
-		},
+		
 		props:{
 			list:{
 				type:Object
+			}
+		},
+		methods:{
+			onFocus(){
+				this.list.focus = true;
+				uni.showToast({
+					title:"关注成功"
+				})
+			},
+			likes(type){
+				switch(type){
+					//1是操作过,2是没操作过
+					case "zan":
+						if(this.list.infonum.index == 1 ){
+							return;
+						}
+						this.list.infonum.dingnum++;
+						if(this.list.infonum.index==2){
+							this.list.infonum.cainum--;
+						}
+						this.list.infonum.index = 1;
+						break;
+					
+					case "cai":
+						if(this.list.infonum.index ==2){
+							return;
+						}
+						this.list.infonum.cainum++;
+						if(this.list.infonum.index==1){
+							this.list.infonum.dingnum--;
+						}
+						this.list.infonum.index = 2;
+						break;
+					
+				}
 			}
 		}
 	}
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .item{
 	display: flex;
 	flex-direction: column;
@@ -166,6 +200,12 @@
 .padding{
 	padding:0 10upx;
 	color:rgb(213, 213, 213);
+}
+.active .ding,.active .cai{
+	color: #FFB400;
+}
+.active .icon-xiaolian,.active .icon-shibaibiaoqing{
+	color: #FFB400;
 }
 img{
 	width: 100%;

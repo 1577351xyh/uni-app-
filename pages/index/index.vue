@@ -45,7 +45,7 @@
 					    	userName:'我是名字',
 					    	userImages:'../../static/images/demo6.jpg',
 					    	//关注状态
-					    	focus:'false',
+					    	focus:false,
 					    	centent:'我是很长的文字文字',
 					    	cententType:'img', //img或者是video
 					    	titlepic:'../../static/images/banner1.jpg',//图片
@@ -67,7 +67,7 @@
 					    	userName:'我是名字',
 					    	userImages:'../../static/images/demo6.jpg',
 					    	//关注状态
-					    	focus:'true',
+					    	focus:true,
 					    	centent:'我是很长的文字文字',
 					    	cententType:'video', //img或者是video
 					    	titlepic:'../../static/images/banner1.jpg',//图片
@@ -92,7 +92,7 @@
 							userName:'我是名字',
 							userImages:'../../static/images/demo6.jpg',
 							//关注状态
-							focus:'false',
+							focus:false,
 							centent:'我是很长的文字文字',
 							cententType:'img', //img或者是video
 							titlepic:'../../static/images/banner1.jpg',//图片
