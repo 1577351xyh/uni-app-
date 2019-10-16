@@ -1,22 +1,7 @@
 <template>
 	<view>
 		<!-- tab -->
-		<view>
-			<scroll-view scroll-x show-scrollbar="false" class="uni-swiper-tab">
-				<block v-for="(tab,index) in tabBars" :key="index">
-					<view class="swiper-tab-list" :class="{'active':tabIndex==index}" @click="tabclick(index)">
-						{{tab.name}}
-						<view class="swiper-tab-line">
-							
-						</view>
-					</view>
-				</block>
-				
-			</scroll-view>
-		</view>
-		<!-- item内容 -->
-		
-		
+		<swiperHeader :tabBars="tabBars" :tabIndex = "tabIndex" @tabclick="tabclick"></swiperHeader>
 		<view class="uni-tab-bar">
 			<swiper class="swiper-box" 
 			:style="{height:SwiperHeight+'px'}" 
@@ -27,6 +12,7 @@
 						<block v-for="(items,index) in item.list" :key="index">
 							<list :list="items"></list>
 						</block>
+						<view></view>
 					</scroll-view>
 				</swiper-item>
 			</swiper>
@@ -38,6 +24,8 @@
 
 <script>
 	import list from '../../compument/index-list/index-list.vue'
+	import swiperHeader from '../../compument/swiper-tab/swiper-tab.vue'
+	
 	export default {
 		data() {
 			return {
@@ -131,7 +119,6 @@
 			},
 			onChange(e){
 				this.tabIndex = e.detail.current;
-				console.log(e)
 			}
 		},
 		onLoad() {
@@ -143,19 +130,12 @@
 			})
 		},
 		components:{
-			list
+			list,
+			swiperHeader
 		}
 	}
 </script>
 
 <style lang="less">
-.active{
-	color:#FFB400;
-	
-}
-.active .swiper-tab-line{
-	border-bottom: 6upx solid #FFB400;
-	width: 60upx;
-	margin: 0 auto;
-}
+
 </style>
