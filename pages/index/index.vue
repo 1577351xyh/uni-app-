@@ -61,7 +61,8 @@
 					    	//分享次数
 					    	shareNum:'10',
 					    	//评论次数
-					    	comment:'100'
+					    	comment:'100',
+							
 					    },
 					    {
 					    	userName:'我是名字',
@@ -160,6 +161,23 @@
 					this.SwiperHeight = res.windowHeight;
 				}
 			})
+		},
+		//源生input点击监听
+		onNavigationBarSearchInputClicked() {
+			uni.navigateTo({
+				url:'../search/search'
+			})
+		},
+		//源生标题导航按钮点击事件
+		onNavigationBarButtonTap(e) {
+			console.log(e);
+			if(e.index===1){
+				uni.navigateTo({
+					url:'../add-input/add-input'
+				})
+			}else if(e.index===0){
+				console.log('签到')
+			}
 		},
 		components:{
 			list,

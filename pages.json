@@ -66,6 +66,51 @@
             "path" : "compument/index-list/index-list",
             "style" : {}
         }
+        ,{
+            "path" : "pages/search/search",
+            "style" : {
+					"navigationBarTitleText":"搜索",
+					"app-plus":{
+						//隐藏滚动条
+						"scrollIndicator":"none",
+						//导航栏
+						"titleNView":{
+							"autoBackButton":false,
+							//搜索框配置
+							"searchInput":{
+								//导航栏input官方组件配置
+								"align":"left",
+								"backgroundColor":"#ffffff",
+								"borderRadius":"4px",
+								"placeholder":"搜索糗事",
+								"placeholderColor":"#cccccc",
+								"disabled":false
+							},
+							"buttons":[
+								//右边
+								{
+									"color":"#000000",
+									"colorPressed":"#888888",
+									"float":"right",
+									"fontSize":"16px",
+									"text":"取消"
+								}
+							]
+						}
+					
+					}
+				
+			}
+        }
+        ,{
+            "path" : "pages/add-input/add-input",
+            "style" : {
+				"app-plus":{
+					//禁止源生导航
+					"titleNView":false
+				}
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
