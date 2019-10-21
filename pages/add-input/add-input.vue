@@ -13,7 +13,13 @@
 		</view>
 		<!-- 上传多图 -->
 		<uploadImages @upload="uploads"></uploadImages>
-		
+		<!-- 弹出公告 -->
+		<view class="bgc" v-show="bgc">
+			<view class="center">
+				<text class="text">我是弹出层</text>
+				<button type="primary" @click="bgc=false">关闭</button>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -24,19 +30,55 @@
 	export default {
 		data() {
 			return {
+				bgc:true,
 				text:'所有人可见',
 				textarea:'',
-				listimages:[]
+				listimages:[],
+				isget:false,
 			}
 		},
 		components:{
 			uniNavBar,
 			uploadImages
 		},
+		onBackPress() {
+			if(this.listimages.length==0 && !this.textarea){
+				return;
+			}
+			if(!this.isget){
+				console.log(1)
+				this.modal();
+				return true;
+			}
+		},
 		methods: {
+			modal(){
+				console.log(222)
+				uni.showModal({
+					content:'是否要保存为草稿',
+					cancelText:'不保存',
+					confirmText:'保存',
+					success: (res) => {
+						if(res.confirm){
+							//存入本地缓存
+							console.log('保存')
+							this.isget = true;
+							uni.navigateBack({
+								delta:1
+							})
+						}else{
+							console.log('不保存')
+							this.isget = true;
+							uni.navigateBack({
+								delta:1
+							})
+						}
+						
+					}
+				})
+			},
 			uploads(arr){
 				this.listimages = arr;
-				console.log(this.listimages)
 			},
 			back(){
 				uni.navigateBack({
@@ -61,7 +103,7 @@
 	}
 </script>
 
-<style scoped>
+<style scoped lang="less">
 	.uni-navbar__content{
 		box-shadow: none;
 	}
@@ -69,6 +111,31 @@
 		display: flex;
 		margin: 0 auto;
 	}
-
+	.bgc{
+		width: 100%;
+		height: 100vh;
+		background-color: rgba(0,0,0,.7);
+		position: absolute;
+		z-index: 10;
+		top: 0;
+		left: 0;
+		.center{
+			position: absolute;
+			width: 70%;
+			height: 50vh;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			padding: 20upx;
+			background-color: #FFFFFF;
+			border-radius: 20upx;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			button{
+				width: 90%;
+			}
+		}
+	}
 		
 </style>
