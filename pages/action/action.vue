@@ -7,9 +7,9 @@
 					<view class="left-icon iconfont icon-qiandao"></view>
 				</block>
 				<view class="center-text">
-					<view class="text_box">
-						<text>关注</text>
-						<text>话题</text>
+					<view class="text_box" :class="{'active':index===activeindex}" v-for="(item,index) in text" :key="index" @click="tabclick(index)">
+						<text>{{item.text}}</text>
+						<view class="activeicons"></view>
 					</view>
 				</view>
 				<block slot="right">
@@ -25,14 +25,20 @@
 	export default {
 		data() {
 			return {
-				
+				activeindex:0,
+				text:[
+					{text:'关注'},
+					{text:'话题'}
+					]
 			}
 		},
 		components:{
 			uniNavBar
 		},
 		methods: {
-			
+			tabclick(index){
+				this.activeindex = index;
+			}
 		},
 		created() {
 			console.log(uniNavBar)
@@ -61,21 +67,29 @@
 		}
 		.center-text{
 			margin: 0 auto;
-			width: 100%;
+			width: 120upx;
 			height: 100%;
 			display: flex;
 			align-content: center;
-			justify-content: center;
+			justify-content: space-between;
 			.text_box{
 				display: flex;
 				align-items: center;
-				justify-content: space-between;
-				width: 130upx;
+				justify-content: center;
+				position: relative;
 				view{
 					flex: 1;
 				}
 			}
 		}
 	}
-	
+	.active .activeicons{
+		position: absolute;
+		bottom:-6upx;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 70%;
+		height: 7upx;
+		background-color:#FFB400;
+	}
 </style>
