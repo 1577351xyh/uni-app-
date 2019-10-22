@@ -59,7 +59,10 @@
         ,{
             "path" : "pages/action/action",
             "style" : {
-				"navigationBarTitleText":"动态"
+				"app-plus":{
+					//禁止源生导航
+					"titleNView":false
+				}
 			}
         }
         ,{

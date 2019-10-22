@@ -8,12 +8,18 @@
 			:current="tabIndex"
 			@change="onChange">
 				<swiper-item v-for="(item,index) in newslist" :key="index">
-					<scroll-view scroll-y class="list" @scrolltolower="loading(index)">
-						<block v-for="(items,index) in item.list" :key="index">
-							<list :list="items"></list>
-						</block>
-						<loading :loading="item.loading"></loading>
-					</scroll-view>
+						<scroll-view scroll-y class="list" @scrolltolower="loading(index)">
+							<template v-if="item.list.length!=0">
+								<block v-for="(items,index1) in item.list" :key="index1">
+									<list :list="items"></list>
+								</block>
+								<loading :loading="item.loading"></loading>
+							</template>
+							<!-- bug -->
+							<template v-else>
+								<view class="bottom">什么内容都没有哦</view>
+							</template>
+						</scroll-view>
 				</swiper-item>
 			</swiper>
 		</view>
@@ -156,6 +162,7 @@
 			}
 		},
 		onLoad() {
+			console.log(1)
 			uni.getSystemInfo({
 				success:(res)=> {
 					this.SwiperHeight = res.windowHeight;

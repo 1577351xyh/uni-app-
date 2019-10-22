@@ -129,7 +129,7 @@
 		display: inline-flex;
 		flex-wrap: nowrap;
 		flex-shrink: 0;
-		width: 120upx;
+		width: 60upx;
 		padding: 0 12upx
 	}
 
