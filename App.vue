@@ -18,4 +18,8 @@
 	@import './common/animation.css';
 	@import './common/font.css';
 	 @import './common/uni.css';
+	 .flex{
+		 display: flex;
+		 justify-content: space-between;
+	 }
 </style>
