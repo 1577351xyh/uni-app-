@@ -1,5 +1,5 @@
 <template>
-	<view class="list_center flex">
+	<view class="list_center flex animated bounceInUp">
 		<view class="list_center_left">
 			<image :src="item.userpic" mode=""></image>
 		</view>
