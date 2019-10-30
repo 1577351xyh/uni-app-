@@ -124,6 +124,26 @@
 				}
 			}
         }
+        ,{
+            "path" : "pages/topic-detail/topic-detail",
+            "style" : {
+				"app-plus":{
+					// 隐藏滚动条
+					"scrollIndicator":"none",
+					"titleNView":{
+						// 透明渐变
+						"type":"transparent",
+						//头部的按钮
+						"buttons":[
+							{
+								"type":"menu"
+							}
+						]
+					}
+					
+				}
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
